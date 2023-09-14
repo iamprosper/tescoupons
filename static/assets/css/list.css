@@ -1,0 +1,82 @@
+.accept {
+  background-color: #0d2042;
+  color: white;
+  border: 2px solid black;
+}
+
+.success {
+  background-color: green;
+  color: white;
+  border: 2px solid black;
+}
+
+.lost {
+  background-color: red;
+  color: white;
+  border: 2px solid black;
+  width: 100%;
+}
+
+.status {
+  width: 10%;
+}
+
+@media (max-width: 850px) {
+  .status {
+    width: 20%;
+  }
+}
+
+.radio-update {
+  background-color: #ffffff;
+}
+
+.update-label {
+  color: black;
+}
+
+.center_cell {
+  text-align: center;
+  vertical-align: middle;
+}
+
+@media (min-width: 851px) {
+  .update_btn {
+    max-width: 50%;
+    height: 50%;
+    background-color: #ffffff;
+    /*color: #ffffff;*/
+    width: 15%;
+  }
+}
+
+@media (max-width: 850px) {
+  .update_btn {
+    max-width: 50%;
+    height: 50%;
+    background-color: #ffffff;
+    /*color: #ffffff;*/
+    width: 45%;
+  }
+}
+
+.edit {
+  width: 100%;
+}
+
+.inline_statut {
+  display: inline-block;
+}
+
+.radio_background {
+  background-color: white;
+}
+
+@media (min-width: 992px) {
+  div {
+    /*--bs-table-bg: white;*/
+    width: 80%;
+    margin: auto;
+  }
+}
+

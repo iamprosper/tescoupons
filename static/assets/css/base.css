@@ -1,0 +1,19 @@
+h2 {
+  background-color: rgba(5,25,60,0.97);
+  color: white;
+  text-align: center;
+  /*border-radius: 10px;*/
+  /*display: none;*/
+  margin: 0;
+  height: 60px;
+  align-items: center;
+  /*align-content: center;*/
+  display: flex;
+  justify-content: center;
+}
+
+.navbar {
+  background-color: #0d2042 !important;
+  /*color: black;*/
+}
+
