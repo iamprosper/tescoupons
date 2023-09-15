@@ -10,7 +10,7 @@ class Coupon(models.Model):
     ONEXBET = "1x"
     BOOKMAKER_CHOICES = [
         (ONEWIN, '1win'),
-        (ONEWIN, '1xbet'),
+        (ONEXBET, '1xbet'),
     ]
     VALIDATED = "V"
     ACCEPTED = "N"
@@ -25,8 +25,8 @@ class Coupon(models.Model):
         choices=BOOKMAKER_CHOICES,
         default=ONEXBET
     )
-    code = models.CharField(max_length=5)
-    img = models.ImageField(upload_to='uploads/%Y/%M/%d')
+    code = models.CharField(max_length=5, default="No", blank=True)
+    img = models.ImageField(upload_to='uploads/')
     status = models.CharField(
         max_length=1,
         choices=STATUT_CHOICES,
