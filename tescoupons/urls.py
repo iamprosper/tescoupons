@@ -19,10 +19,12 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import  static
 
+admin.site.site_header = "Administration des coupons"
+
 urlpatterns = [
     #path("polls/", include("polls.urls")),
     path('admin/', admin.site.urls),
-    path('pronos/', include('pronos.urls')),
+    path('', include('pronos.urls')),
 ]
 
 if settings.DEBUG:

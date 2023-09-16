@@ -32,7 +32,8 @@ class Coupon(models.Model):
         choices=STATUT_CHOICES,
         default=ACCEPTED
     )
-    pub_date = models.DateTimeField(default=timezone.now)
+    pub_date = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return "{} - {}".format(self.bookmaker, self.code)
