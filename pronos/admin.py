@@ -15,8 +15,19 @@ class CouponAdminForm(forms.ModelForm):
         model = Coupon
         exclude = ['pub_date', 'updated_at']
 
+    def clean(self):
+        cleaned_data = super().clean()
+        code = self.fields.get('code')
+        bookmaker = cleaned_data.get('bookmaker')
+        # bookmaker = self.cleaned_data.get('bookmaker')
+        if bookmaker == '1x' and code:
+            code.required = True
+        elif code:
+            code.required = False
+
 
 class CouponAdmin(admin.ModelAdmin):
+    form = CouponAdminForm
     list_display = ('bookmaker', 'code', 'img', 'status', 'jour_pub')
 
     def jour_pub(self, obj):

@@ -16,9 +16,52 @@ def index(request):
     weeks = test_coupons.keys()
     dict_days = test_coupons.values()
     days = {}
+    validated = 0
     for dd in dict_days:
         days = dd
-
+    print(days)
+    print(type(days))
+    coupons_day_list = [coupon_day for coupon_day in days.values()]
+    print(coupons_day_list)
+    stats_coupon = {}
+    day = 0
+    coupons_stats = []
+    for coupons_day in coupons_day_list:
+        count = 0
+        stat = ""
+        # coupons_validated = []
+        for coupon in coupons_day[:]:
+            if coupon.status != "V":
+                coupons_day.remove(coupon)
+            else:
+                # coupons_validated.append(coupon)
+                count += 1
+        if dict_stats["{}".format(day)] > 0 and count > 0:
+            stat = "{}%".format((count * 100) // dict_stats["{}".format(day)])
+        else:
+            if dict_stats["{}".format(day)] > 0:
+                stat = "0%"
+            else:
+                stat = 'No posts'
+        stats_coupon["{}".format(day)] = {
+            stat: coupons_day
+        }
+        coupons_stats.append([stat, coupons_day])
+        day += 1
+    # for item in coupons_stats:
+    #     print(item)
+    print(coupons_stats)
+    # print(stats_coupon)
+    # for day_stat in stats_coupon:
+    #     print("{} - {}".format(day_stat, stats_coupon[day_stat]))
+    # print(coupons_day_list)
+    # print("..................")
+    # days_stats = [item for item in stats_coupon.values()]
+    # print(days_stats)
+    # print(type(days_stats))
+    # for day_stat in days_stats:
+    #     print("{}".format(day_stat.items()))
+    #     print(type(day_stat.items()))
     # for day in days:
 
     # days = test_coupons.values()
@@ -34,7 +77,8 @@ def index(request):
             'total_onexbet': total_onexbet,
             'weeks': weeks,
             'days': days.values(),
-            'coupons_per_day': dict_stats.values()
+            'coupons_per_day': dict_stats.values(),
+            'coupons_stats': coupons_stats,
         }
     )
 
@@ -78,7 +122,7 @@ def stats():
         dict_stats[day_number] += 1
         weeks[week_number][day_number].append(coupon)
 
-    return  weeks, dict_stats
+    return weeks, dict_stats
 
 
 

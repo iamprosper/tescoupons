@@ -123,7 +123,16 @@
                             <span>Pas de coupons disponibles pour l'instant sur onexbet</span>
                         {% endif %}
                     </div>
-                    <div><a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon carousel-background"></span><span class="visually-hidden">Previous</span></a><a class="carousel-control-next" href="#carousel-2" role="button" data-bs-slide="next"><span class="carousel-control-next-icon carousel-background"></span><span class="visually-hidden">Next</span></a></div>
+                    <div>
+                        <a class="carousel-control-prev" href="#carousel-2" role="button" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon carousel-background"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel-2" role="button" data-bs-slide="next">
+                            <span class="carousel-control-next-icon carousel-background"></span>
+                            <span class="visually-hidden">Next</span>
+                        </a>
+                    </div>
                     <div class="carousel-indicators">
                         <button type="button" data-bs-target="#carousel-2" data-bs-slide-to="0" class="active"></button>
                         <button type="button" data-bs-target="#carousel-2" data-bs-slide-to="1"></button>
@@ -180,20 +189,12 @@
                 </tbody>
             </table>
         </div>
+        <ul>
     </div>
 {#    <div>#}
 {#        {% for week in weeks %}#}
 {#            <span>{{ week }}</span>#}
-            <ul>
-                {% for day in days %}
-                    <li> {{ day }}</li>
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for coupons in coupons_per_day %}
-                    <li> {{ coupons }}</li>
-                {% endfor %}
-            </ul>
+
 {#        {% endfor %}#}
 {#    </div>#}
     <div class="modal fade" role="dialog" tabindex="-1" id="modal-1" style="/*display: block;*/">

@@ -20,18 +20,23 @@ class Coupon(models.Model):
         (ACCEPTED, "Accepté"),
         (LOST, "Perdu"),
     ]
+
     bookmaker = models.CharField(
         max_length=4,
         choices=BOOKMAKER_CHOICES,
         default=ONEXBET
     )
-    code = models.CharField(max_length=5, default="No", blank=True)
+
+    code = models.CharField(max_length=5,
+                            help_text="Uniquement requis pour le bookmaker 1xbet")
+
     img = models.ImageField(upload_to='uploads/')
     status = models.CharField(
         max_length=1,
         choices=STATUT_CHOICES,
         default=ACCEPTED
     )
+
     pub_date = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
