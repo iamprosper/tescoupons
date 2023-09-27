@@ -1,6 +1,26 @@
 document.getElementById("onexb").setAttribute("onclick", "showx()");
 onex = document.getElementById("onex");
 onew = document.getElementById("onewin");
+var modal = document.getElementById("modal");
+var buttons = document.querySelectorAll(".modal-button");
+var modalContent = document.getElementById("modal-content-details");
+
+buttons.forEach(function (button){
+    button.addEventListener("click", function (){
+        var week = button.getAttribute("data-week");
+        var day = button.getAttribute("data-day");
+        var codes = coupons_imgs[week][day];
+
+        modalContent.innerHTML = codes;
+
+        modal.style.display = "block";
+    });
+});
+
+var closeButton = document.querySelector(".close");
+closeButton.addEventListener("click", function (){
+    modal.style.display = "none";
+});
 
 var mediaQuery = window.matchMedia("(min-width: 991.5px)")
 
