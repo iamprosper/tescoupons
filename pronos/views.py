@@ -9,8 +9,8 @@ from datetime import datetime
 
 def index(request):
     coupons = Coupon.objects.all()
-    onewin_coupons = Coupon.objects.filter(bookmaker="1w")
-    onexbet_coupons = Coupon.objects.filter(bookmaker="1x")
+    onewin_coupons = Coupon.objects.filter(bookmaker="1w").filter(Q(status='N'))
+    onexbet_coupons = Coupon.objects.filter(bookmaker="1x").filter(Q(status='N'))
     # counter = 0
     total_onewin = onewin_coupons.count()
     total_onexbet = onexbet_coupons.count()

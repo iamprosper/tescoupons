@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils import timezone
 
@@ -28,7 +29,8 @@ class Coupon(models.Model):
     )
 
     code = models.CharField(max_length=5,
-                            help_text="Uniquement requis pour le bookmaker 1xbet")
+                            help_text="Uniquement requis pour le bookmaker 1xbet",
+                            blank=True)
 
     img = models.ImageField(upload_to='uploads/')
     status = models.CharField(
@@ -39,6 +41,14 @@ class Coupon(models.Model):
 
     pub_date = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def clean(self):
+        if self.bookmaker == "1x" and not self.code:
+            raise ValidationError("Code requis pour 1x bet")
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super(Coupon, self).save(*args, **kwargs)
 
     def __str__(self):
         return "{} - {}".format(self.bookmaker, self.code)

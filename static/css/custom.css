@@ -39,6 +39,9 @@ a {
   justify-content: center;
 }
 
+.carousel-indicators [data-bs-target]{
+  background-color: #002e5f;
+}
 body {
   font-family: Trebuchet MS, Lucida Grande, Lucida Sans Unicode, Lucida Sans, sans-serif;
   background-color: white;

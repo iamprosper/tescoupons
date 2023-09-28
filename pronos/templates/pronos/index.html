@@ -115,9 +115,22 @@
                 <div class="carousel-inner {% if total_onexbet == 0 %} carousel-content {% endif %}" style="position: static;height: 100%;">
                     {% if total_onexbet > 0 %}
                         {% for coupon in onexbet_coupons %}
+{#                            {% with code=coupon.code %}#}
+{##}
+{#                                <script>#}
+{#                                    var code = "{{ code }}";#}
+{#                                    console.log(code);#}
+{#                                </script>#}
+{#                                <span>{{ code }}</span>#}
+{#                                #}
+{#                            {% endwith %}#}
+
+
                             <div class="carousel-item {% if forloop.first %}active {% endif %}" style="position: static;height: 100%;">
                                 <img class="img-fluid w-100 d-block" src="{{ coupon.img.url }}" alt="Slide Image" style="height: 100%;object-fit: contain !important;" width="40px" height="100px">
+                                <span class="coupon_code">{{ coupon.code }}</span>
                             </div>
+{#                            {% endwith %}#}
                         {% endfor %}
                     {% else %}
                         <span>Pas de coupons disponibles pour l'instant sur onexbet</span>
@@ -140,7 +153,7 @@
                         {#                            <button type="button" data-bs-target="#carousel-2" data-bs-slide-to="2"></button>#}
                     {% endfor %}
                 </div>
-            </div><button class="btn btn-primary copy" type="button" style="background-color: #002e5f;">Copier</button>
+            </div><button id="copy_btn" class="btn btn-primary copy" type="button" style="background-color: #002e5f;">Copier</button>
         </div>
         <div id="onewin" class="coupon bookmaker">
             <h3 class="brokers_name" style="/*margin-bottom: 10px;*/background-color: #1B253B;">1win</h3>
@@ -173,7 +186,7 @@
                         {#                            <button type="button" data-bs-target="#carousel-3" data-bs-slide-to="2"></button>#}
                     {% endfor %}
                 </div>
-            </div><button class="btn btn-primary copy" type="button" style="display: inline-block;background-color: #1B253B;">Copier</button>
+            </div>
         </div>
     </div>
     <div class="table-responsive">

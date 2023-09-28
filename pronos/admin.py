@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import AdminSite
+from django.db.models import F
+
 from .models import Coupon
 from django import forms
 from django.utils.translation import gettext  as _
@@ -15,15 +17,25 @@ class CouponAdminForm(forms.ModelForm):
         model = Coupon
         exclude = ['pub_date', 'updated_at']
 
-    def clean(self):
-        cleaned_data = super().clean()
-        code = self.fields.get('code')
-        bookmaker = cleaned_data.get('bookmaker')
-        # bookmaker = self.cleaned_data.get('bookmaker')
-        if bookmaker == '1x' and code:
-            code.required = True
-        elif code:
-            code.required = False
+    def __init__(self, *args, **kwargs):
+        super(CouponAdminForm, self).__init__(*args, **kwargs)
+        instance = kwargs.get('instance')
+        if instance:
+            if instance.bookmaker == "1x":
+                self.fields['code'].required = True
+            else:
+                self.fields['code'].required = False
+                self.fields['code'].widget.attrs['disabled'] = 'disabled'
+
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     code = self.fields.get('code')
+    #     bookmaker = cleaned_data.get('bookmaker')
+    #     # bookmaker = self.cleaned_data.get('bookmaker')
+    #     if bookmaker == '1x' and code:
+    #         code.required = True
+    #     elif code:
+    #         code.required = False
 
 
 class CouponAdmin(admin.ModelAdmin):
@@ -69,6 +81,11 @@ class CouponAdmin(admin.ModelAdmin):
         return pub_clean_date
 
     jour_pub.short_description = _("Date de publication")
+
+    def jour_pub_sort(self, obj):
+        return obj.pub_date
+
+    jour_pub.admin_order_field = F('pub_date')
     """
     def image_display(self, obj):
         return f'<img src="{obj.img.url}" width="100" height="100" />'
@@ -80,4 +97,5 @@ class CouponAdmin(admin.ModelAdmin):
 
 # admin_site = PronosAdminSite(name="pronos_admin")
 # admin_site.language = 'fr'
+
 admin.site.register(Coupon, CouponAdmin)

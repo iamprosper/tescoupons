@@ -1,6 +1,38 @@
 document.getElementById("onexb").setAttribute("onclick", "showx()");
 onex = document.getElementById("onex");
 onew = document.getElementById("onewin");
+
+copy_btn = document.querySelector('#copy_btn');
+
+copy_btn.addEventListener('click', ()=>{
+    const active_coupon = document.querySelector('.carousel-item.active')
+    if (active_coupon){
+        const codeElement = active_coupon.querySelector('.coupon_code');
+        if (codeElement){
+            const code = codeElement.textContent;
+            console.log(code);
+            navigator.clipboard.writeText(code).then(() =>{
+                console.log("Text copied to clipboard");
+                copy_btn.textContent = "Code copié"
+                setTimeout(() =>{
+                    copy_btn.textContent = "Copier";
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy error');
+            });
+            // copyToClipboard(code);
+        }
+    }
+});
+
+/*function copyToClipboard(text){
+    const input = document.createElement('textarea');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+}*/
 // var modal = document.getElementById("modal");
 // var buttons = document.querySelectorAll(".modal-button");
 // var modalContent = document.getElementById("modal-content-details");
