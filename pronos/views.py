@@ -70,16 +70,19 @@ def index(request):
     # template = loader.get_template("pronos/index.html")
     # return HttpResponse(template.render(None, request))
 
+    weeks_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+
+
     obj_by_weeks = Coupon.objects.filter(pub_date__month=datetime.now().month).annotate(
         week=TruncWeek('pub_date'),
         day=TruncDay('pub_date'),
-    ).values('week', 'day', 'code').filter(status='V').order_by('week')
+    ).values('week', 'day', 'img').filter(status='V').order_by('week')
 
     coupons_validated_img = {}
     for obj in obj_by_weeks:
         week = obj['week'].date().isocalendar().week
         day = obj['day'].strftime('%A')
-        img = obj['code']
+        img = obj['img']
 
         if week not in coupons_validated_img:
             coupons_validated_img[week] = {}
@@ -89,11 +92,8 @@ def index(request):
 
         coupons_validated_img[week][day].append(img)
 
-    print(coupons_validated_img)
+    # print(coupons_validated_img)
 
-    for k, v in coupons_validated_img.items():
-        print("Key {}, Value {}".format(k, v))
-        print(v['Tuesday'])
     # ids=[]
 
     validated_coupon = Coupon.objects.filter(pub_date__month=datetime.now().month).annotate(
@@ -124,13 +124,34 @@ def index(request):
 
         # coupon_validated_percentage[week][day].append(percentage)
 
-    print(coupon_validated_percentage)
+    # print(coupon_validated_percentage)
+    # print(coupons_validated_img)
 
+    for week, days in coupon_validated_percentage.items():
+        print("Week {}".format(week))
+        for week_day in weeks_days:
+            if week_day in days:
+                # print("Found")
+                for day, percentage in days.items():
+                    if day == week_day:
+                        print("Day {} - {}%".format(day, percentage))
+
+        # print("Week {} -, days{}".format(week, days))
+
+    for week, days in coupons_validated_img.items():
+        print("Week {} -".format(week))
+        for week_day in weeks_days:
+            if week_day in days:
+                # print("Found")
+                for day, imgs in days.items():
+                    if day == week_day:
+                        print("Day {}".format(day))
+                        for img in imgs:
+                            print("----Img {}".format(img))
     # print(obj_by_weeks)
 
     data_by_week_and_day = {}
 
-    weeks_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
     # for obj in obj_by_weeks:
     #     week = obj['week']

@@ -152,3 +152,10 @@ th {
   height: 100%;
 }
 
+.carousel-control-next-icon{
+  background-color: #0b3147;
+}
+
+.carousel-control-prev-icon{
+  background-color: #0b3147;
+}
